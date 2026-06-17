@@ -64,23 +64,3 @@ export async function GET() {
         return NextResponse.json({ message: 'Failed to fetch events', error: e }, { status: 500 });
     }
 }
-
-//a route that accepts a slug as input -> returns the event details
-export async function GET(req: NextRequest) {
-    try {
-        await connectDB();
-        const { searchParams } = new URL(req.url);
-        const slug = searchParams.get('slug');
-        if (!slug) {
-            return NextResponse.json({ message: 'Slug is required' }, { status: 400 });
-        }
-        const event = await Event.findOne({ slug });
-        if (!event) {
-            return NextResponse.json({ message: 'Event not found' }, { status: 404 });
-        }
-        return NextResponse.json({ message: 'Event fetched successfully', event }, { status: 200 });
-    } catch (e) {
-        console.log(e);
-        return NextResponse.json({ message: 'Failed to fetch event', error: e }, { status: 500 });
-    }
-}
