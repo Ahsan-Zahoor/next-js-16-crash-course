@@ -103,7 +103,15 @@ const EventDetailsPage = async ({params} : {params: Promise<{slug: string}>}) =>
             <h2> Similar Events</h2>
             <div className="Events">
                 {similarEvents.length > 0 && similarEvents.map((similarEvent: IEvent, index) => (
-                    <EventCard key={index} {...similarEvent} />
+                    <EventCard
+                        key={index}
+                        title={similarEvent.title}
+                        image={similarEvent.image}
+                        slug={similarEvent.slug}
+                        location={similarEvent.location}
+                        date={similarEvent.date}
+                        time={similarEvent.time}
+                    />
                 ))}
             </div> 
       </div>
